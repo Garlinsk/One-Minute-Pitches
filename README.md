@@ -26,7 +26,7 @@ An application that allows users to use that one minute wisely. The users will s
 
 # Prerequisites
 
-To work with PITCHRANKR App you need to have some few prerequisites.
+To work with ONE-MINUTE-PITCHES App you need to have some few prerequisites.
 
 - Python3.9
 
