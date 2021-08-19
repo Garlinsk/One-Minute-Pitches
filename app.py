@@ -1,12 +1,19 @@
 from flask import Flask,render_template
 
+# import forms
+from forms import loginForm,signupForm
+
 # create an instace of my app
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-     return render_template('index.html')
+
+    form = loginForm()
+
+    return render_template('index.html',form=form)
+
 
 
 @app.route('/login') 
@@ -16,6 +23,8 @@ def login():
 
 @app.route('/singup') 
 def signup():
+
+
     return render_template('signup.html')
 
 @app.route('/my_schedule') 
