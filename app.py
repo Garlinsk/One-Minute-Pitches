@@ -1,11 +1,14 @@
 from flask import Flask, render_template
-
+from flask_sqlalchemy import SQLAlchemy
+from configs.base_config import *
 # import forms
 from forms import loginForm, signupForm
 
 # create an instace of my app
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "mbogiyapython"
+
+app.config.from_object(Development)
+db =SQLAlchemy(app)
 
 
 
