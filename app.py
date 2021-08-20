@@ -14,10 +14,15 @@ def home():
 
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login',methods =["GET", "POST"])
 def login():
 
     form = loginForm()
+
+    #check for validation
+    if form.validate_on_submit():
+        print("username",form.username.data,"password",form.password.data)
+
 
     return render_template('login.html',form=form)
 
@@ -25,7 +30,13 @@ def login():
 @app.route('/singup')
 def signup():
 
-    return render_template('signup.html')
+    form = signupForm()
+
+    # get data
+    # send data to a db
+
+
+    return render_template('signup.html',form=form)
 
 
 @app.route('/my_schedule')
