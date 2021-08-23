@@ -54,6 +54,18 @@
     font-weight: 600;
 }
 
+.login-ghost-button {
+    outline: none;
+    border: none;
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    width: 200px;
+    border-radius: 8px;
+    background-color: #0096c7;
+    color: #fff;
+    font-weight: 600;
+}
+
 .signup-ghost-button {
     outline: none;
     border: none;
@@ -66,8 +78,8 @@
     font-weight: 600;
 }
 
-/* my schedule page */
+/* about page */
 
-/* .my-schedule {
+/* .about {
     border: 1px solid #111;
 } */
