@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from app.config import Config
 from flask_migrate import Migrate
 from app.config import config_options
-from flask_mail import Mail
+# from flask_mail import Mail
 from app import error
 
 
@@ -15,7 +15,7 @@ login_manager.login_message_category = 'info'
 
 
 app = Flask(__name__)
-mail = Mail()
+# mail = Mail()
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
@@ -33,7 +33,7 @@ def create_app(config_name):
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
-    mail.init_app(app)
+    # mail.init_app(app)
     
     from app.users.views import users 
     from app.posts.views import posts
