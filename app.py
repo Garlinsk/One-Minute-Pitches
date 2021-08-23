@@ -1,9 +1,7 @@
-
-from models.user import User
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from configs.base_config import *
-from werkzeug.security import check_password_hash,generate_password_hash
+
 
 # import forms
 from forms import loginForm, signupForm
@@ -15,17 +13,8 @@ app.config.from_object(Development)
 
 db = SQLAlchemy(app)
 
-# get the data
-if form.validate_on_submit():
-    first_name = form.first_name.data
-    last_name = form.last_name.data
-    email = form.email.data
-    password = form.password.data
-
-    # hash password
-
-
 # import models
+from models.user import User
 
 # @app.before_first_request
 # def create_tables():
