@@ -1,46 +1,40 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
-from config import Config
-from flask_migrate import Migrate
+from flask_bootstrap import Bootstrap
 from config import config_options
-from flask_mail import Mail
-from app import error
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+#from flask_uploads import UploadSet, configure_uploads, IMAGES
+#from flask_mail import Mail
 
 
-login_manager = LoginManager()
-login_manager.login_view = 'users.login'
-login_manager.login_message_category = 'info'
-
-
-app = Flask(__name__)
-mail = Mail()
-# bootstrap = Bootstrap()
+bootstrap = Bootstrap()
 db = SQLAlchemy()
-bcrypt = Bcrypt()
+login_manager = LoginManager()
 
 
 def create_app(config_name):
 
-    # Creating the app configurations
+    app = Flask(__name__)
+
+    # Creating the app configurations.
     app.config.from_object(config_options[config_name])
-    app.config['SECRET_KEY'] = "357f7417-dc77-4dee-a65b-44dbaa5d6d5e"
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://garlinsk:kenya254@localhost/frank"
-    print(app.config['SQLALCHEMY_DATABASE_URI'])
-    app.config['DEBUG'] = True
-    # bootstrap.init_app(app)
+
+    # Intitializing flask extensions
+    bootstrap.init_app(app)
     db.init_app(app)
-    bcrypt.init_app(app)
     login_manager.init_app(app)
+    login_manager.session_protection = 'strong'
+    login_manager.login_view = 'auth.login'
+    # configure upload setUp
 
-    # mail.init_app(app)
-    from app.users.views import users
-    from app.posts.views import posts
-    from app.main.views import main
+    # Registering the blueprint
 
-    app.register_blueprint(users)
-    app.register_blueprint(posts)
-    app.register_blueprint(main)
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/authenticate')
+
+    # setting config
 
     return app

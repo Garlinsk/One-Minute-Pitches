@@ -1,18 +1,25 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, TextField, SelectField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from app.models import User
-from flask_login import current_user
+from wtforms import StringField,TextAreaField,SubmitField,SelectField
+from wtforms.validators import Required
 
 
-class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    category = SelectField('Categories', choices=[('Product Pitch', 'Product Pitch'), ('Sales', 'Sales Pitch'), ('Business Pitch', 'Business Pitch'), ('Interview Pitch', 'Interview Pitch')], validators=[DataRequired()])
-    submit = SubmitField('Post')
-    
-    
+class PitchForm(FlaskForm):
+    '''
+    Class to create a wtf form for creating a pitch
+    '''
+    content = TextAreaField('YOUR PITCH')
+    submit = SubmitField('SUBMIT')
+
 class CommentForm(FlaskForm):
-    comment = TextAreaField('Comment')
-    submit = SubmitField('Submit')
+    '''
+    Class to create a wtf form for creating a pitch
+    '''
+    opinion = TextAreaField('WRITE COMMENT')
+    submit = SubmitField('SUBMIT')
+
+class CategoryForm(FlaskForm):
+    '''
+    Class to create a wtf form for creating a pitch
+    '''
+    name =  StringField('Category Name', validators=[Required()])
+    submit = SubmitField('Create')
