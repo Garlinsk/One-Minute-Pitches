@@ -1,23 +1,33 @@
 import os
+import secrets
 
 class Config:
     '''
     General configuration parent class
     '''
-    SECRET_KEY= os.environ.get('SECRET_KEY')
+    # SECRET_KEY= os.environ.get('SECRET_KEY')
+    FLASK_ENV = os.environ.get("FLASK_ENV")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI ="postgresql+psycopg2://garlinsk:Kuloba3811@localhost/garlinsk"
+    SECRET_KEY = secrets.token_hex()
+    
 
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")  # or other relevant config var
-    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+    DATABASE =""
+    POSTGRES_USER =""
+    POSTGRES_PASSWORD = ""
+    SQLALCHEMY_DATABASE_URI =""
+   
     DEBUG = True
 
 class DevConfig(Config):
+    FLASK_ENV =os.environ.get("FLASK_ENV")
+    DATABASE = os.environ.get("frank")
+    POSTGRES_USER =os.environ.get("garlinsk")
+    POSTGRES_PASSWORD =os.environ.get("kenya254")
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://garlinsk:kenya254@localhost/frank'
         
-    DEBUG = True
+    
 config_options = {
     'development': DevConfig,
     'production': ProdConfig
