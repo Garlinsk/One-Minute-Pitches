@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, abort
-from . import main
+from .import main
 from ..models import User,Pitch,Comments,PitchCategory,Votes
 from .. import db
 from . forms import PitchForm, CommentForm, CategoryForm
@@ -12,12 +12,12 @@ def index():
 
     category = PitchCategory.get_categories()
 
-    title = 'Home- Welcome'
+    title = 'WELCOME TO ONE MINUTE PITCH'
     return render_template('index.html', title = title, categories=category)
 
 
 
-#Route for adding a new pitch
+#Route for adding a new pitcEh
 @main.route('/category/new-pitch/<int:id>', methods=['GET', 'POST'])
 @login_required
 def new_pitch(id):
