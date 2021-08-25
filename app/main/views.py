@@ -138,11 +138,11 @@ def downvote(id):
     return redirect(url_for('.view_pitch', id=id))
 
 @main.route('/pitch/downvote/<int:id>')
-def vote_count(id):
+def vote_count(user_id):
     '''
     View function to return the total vote count per pitch
     '''
-    votes = Votes.query.filter_by(user_id=user_id, line_id=line_id).all()
+    votes = Votes.query.filter_by(user_id=user_id).all()
 
     total_votes = votes.count()
 

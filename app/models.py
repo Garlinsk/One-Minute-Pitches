@@ -131,12 +131,13 @@ class Comments(db.Model):
 
 # votes
 
-# class Votes(db.Model):
+class Votes(db.Model):
+
     '''class to model votes '''
     __tablename__='votes'
 
     id = db.Column(db. Integer, primary_key=True)
-  #  vote = db.Column(db.Integer)
+    vote = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     pitches_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
 
@@ -146,5 +147,5 @@ class Comments(db.Model):
 
     @classmethod
     def get_votes(cls,user_id,pitches_id):
-        votes = Vote.query.filter_by(user_id=user_id, pitches_id=pitches_id).all()
+        votes = Votes.query.filter_by(user_id=user_id, pitches_id=pitches_id).all()
         return votes
