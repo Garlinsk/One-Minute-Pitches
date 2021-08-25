@@ -12,12 +12,13 @@ def index():
 
     category = PitchCategory.get_categories()
 
-    title = 'WELCOME TO ONE MINUTE PITCH'
+    title = 'HOME- WELCOME TO ONE MINUTE PITCH'
+
     return render_template('index.html', title = title, categories=category)
+    
 
 
-
-#Route for adding a new pitcEh
+#Route for adding a new pitch
 @main.route('/category/new-pitch/<int:id>', methods=['GET', 'POST'])
 @login_required
 def new_pitch(id):

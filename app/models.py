@@ -28,9 +28,9 @@ class User(UserMixin, db.Model):
     pass_secure = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    pitches = db.relationship("Pitch", backref="user", lazy="dynamic")
-    comment = db.relationship("Comments", backref="user", lazy="dynamic")
-    vote = db.relationship("Votes", backref="user", lazy="dynamic")
+    pitches = db.relationship("Pitch", backref="users", lazy="dynamic")
+    comment = db.relationship("Comments", backref="users", lazy="dynamic")
+    vote = db.relationship("Votes", backref="users", lazy="dynamic")
 
 
 # securing passwords
@@ -83,8 +83,7 @@ class Pitch(db.Model):
         content = db.Column(db.String)
         category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
         user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-        comment = db.relationship(
-            "Comments", backref="pitches", lazy="dynamic")
+        comment = db.relationship("Comments", backref="pitches", lazy="dynamic")
         vote = db.relationship("Votes", backref="pitches", lazy="dynamic")
 
 
@@ -131,6 +130,7 @@ class Comments(db.Model):
         return comment
 
 # votes
+
 # class Votes(db.Model):
     '''class to model votes '''
     __tablename__='votes'
